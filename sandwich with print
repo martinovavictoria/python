@@ -1,0 +1,26 @@
+def bread(func):
+    def wrapper():
+        print("хлеб")
+        func()
+        print("хлеб") 
+    return wrapper
+
+def vegetables(func):
+    def wrapper():
+        print("салат")
+        func()
+    return wrapper
+
+def meat(func):
+    def wrapper():
+        print("ветчина")
+        func()
+    return wrapper
+
+@bread
+@vegetables
+@meat
+def sandwich():
+    print("сыр")
+
+sandwich()
