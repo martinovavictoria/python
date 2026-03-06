@@ -1,0 +1,35 @@
+def make_key(func_name, *args):
+    return (func_name,) + args 
+
+def cache(func):
+    cache_storage = {}
+    
+    def wrapper(*args):
+        key = make_key(func.__name__, *args)
+        
+        if key in cache_storage:
+            print(f"{func.__name__}{args} взято из кеша: {cache_storage[key]}")
+            return cache_storage[key]
+        
+        print(f"Вычисляем {func.__name__}{args}")
+        result = func(*args)
+        cache_storage[key] = result
+        return result
+    
+    return wrapper
+
+@cache
+def calculate_sum(*numbers):
+    return sum(numbers)
+
+@cache
+def calculate_multiply(*numbers):
+    result = 1
+    for n in numbers:
+        result *= n
+    return result
+
+print(calculate_sum(2, 3))      # Ключ: ('calculate_sum', 2, 3)  5
+print(calculate_multiply(2, 3))  # Ключ: ('calculate_multiply', 2, 3)  6
+print(calculate_sum(2, 3))       # Из кеша
+print(calculate_multiply(2, 3))  # Из кеша
