@@ -1,0 +1,30 @@
+import os
+import sys
+
+def retry_on_exception(func):
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except ValueError:
+            # При ValueError просто повторяем вызов
+            return func(*args, **kwargs)
+        except OSError:
+            # При OSError выводим сообщение и повторяем
+            print(f"{func.__name__} raise OSError exception.", file=sys.stdout)
+            return func(*args, **kwargs)
+    
+    return wrapper
+
+@retry_on_exception
+def read_file(filename):
+    # Может вызвать OSError если файла нет
+    with open(filename, 'r') as f:
+        return f.read()
+
+@retry_on_exception
+def divide_numbers(a, b):
+    # Может вызвать ValueError если b = 0
+    return a / b
+
+print(divide_numbers(10, 2))  # 5
+print(divide_numbers(10, 0))  # ValueError
