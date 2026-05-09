@@ -106,3 +106,5 @@ game.combine("Огонь", "Огонь")
 
 print()
 game.show_elements()
+
+# (⁠=⁠^⁠･⁠ｪ⁠･⁠^⁠=⁠)
