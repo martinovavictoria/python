@@ -34,8 +34,8 @@ class StoreQueue:
 
     class StoreQueue:
         def __init__(self):
-            self.front = None  # Кто первый на кассу
-            self.rear = None  # Кто последний в очереди
+            self.front = None  
+            self.rear = None  
 
         def enqueue(self, customer_name):
             new_node = Node(customer_name)
@@ -63,8 +63,8 @@ class StoreQueue:
 
 class StoreQueue:
     def __init__(self):
-        self.front = None # Кто первый на кассу
-        self.rear = None  # Кто последний в очереди
+        self.front = None 
+        self.rear = None 
 
     def enqueue(self, customer_name):
         new_node = Node(customer_name)
