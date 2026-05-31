@@ -38,7 +38,7 @@ class AlchemyGame:
         self._add_recipe("Жизнь", "Земля", "Растение")
         self._add_recipe("Буря", "Вода", "Цунами")
 
-    def _add_recipe(self, elem1_name, elem2_name, result_name)
+    def _add_recipe(self, elem1_name, elem2_name, result_name):
         key = tuple(sorted([elem1_name, elem2_name]))
         self.recipes[key] = result_name
 
