@@ -33,9 +33,9 @@ class ClassDlyaIgrokov:
 class Igrok(ClassDlyaIgrokov):
     def make_choice(self):
         print(f"\n{self.name}, твой ход! Выбери:")
-        print("1 - камень")
-        print("2 - ножницы")
-        print("3 - бумага")
+        print("1 - Камень")
+        print("2 - Ножницы")
+        print("3 - Бумага")
         while True:
             try:
                 user_input = int(input())
