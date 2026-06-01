@@ -1,3 +1,12 @@
+'''Это декоратор с параметрами, который кеширует результаты вызовов функций. Если функция вызывается с теми же аргументами повторно, результат берётся из кеша, а не вычисляется заново. Кеш может сохраняться в JSON-файл между запусками программы.
+
+Декоратор cache(file_name=None, key_type='args')
+Это функция, возвращающая декоратор. Такая конструкция позволяет передавать параметры (file_name и key_type) в декоратор.
+
+Внутреннее хранилище кеша
+cache_storage = {}
+Словарь, где ключ - это набор аргументов, а значение — результат функции.'''
+
 import json
 import os
 import ast
@@ -5,7 +14,7 @@ import ast
 def cache(file_name=None, key_type='args'):
     def decorator(func):
         cache_storage = {}
-        
+        #Загрузка кеша из файла (при наличии)
         if file_name and os.path.exists(file_name):
             try:
                 with open(file_name, 'r') as f:
@@ -16,7 +25,7 @@ def cache(file_name=None, key_type='args'):
                     print(f"Загружено {len(cache_storage)} записей из {file_name}")
             except:
                 pass
-        
+        #Функция формирования ключа, создаёт уникальный ключ для кеша:'args' - учитывает только позиционные аргументы, 'kwargs' - учитывает только именованные аргументы, 'both' - учитывает и те, и другие
         def make_key(*args, **kwargs):
             if key_type == 'args':
                 return (func.__name__,) + args
@@ -32,7 +41,7 @@ def cache(file_name=None, key_type='args'):
                 try:
                     serializable = {}
                     for key, value in cache_storage.items():
-                        serializable[str(key)] = value
+                        serializable[str(key)] = value  # Ключ-кортеж → строка
                     with open(file_name, 'w') as f:
                         json.dump(serializable, f)
                 except:
