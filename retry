@@ -1,4 +1,3 @@
-import os
 import sys
 
 def retry_on_exception(func):
@@ -27,4 +26,4 @@ def divide_numbers(a, b):
     return a / b
 
 print(divide_numbers(10, 2))  # 5
-print(divide_numbers(10, 0))  # ValueError
+print(divide_numbers(10, 0))  
